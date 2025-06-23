@@ -33,6 +33,8 @@ This project is a fullstack web application allowing users to manage a todo list
 3.  **Pull the Ollama AI Model (Gemma):**
     
         docker compose exec ollama ollama pull gemma:2b
+
+*note that the model will take time to "warm up" on the first few requests.*
     
 4.  **Start Adminer (optional, DB management):**
     
@@ -63,7 +65,7 @@ This project is a fullstack web application allowing users to manage a todo list
 📺 Project Demo
 ---------------
 
-[![Project Demo in YouTube](https://www.youtube.com/watch?v=WSl_B8qAZyM)
+[Project demo on YouTube](https://www.youtube.com/watch?v=WSl_B8qAZyM)
 
 
 🎯 Bonus Tasks Implemented
