@@ -14,6 +14,7 @@ export async function tagWithLLM(task: string): Promise<Category> {
   const base = process.env.OLLAMA_BASE_URL || "http://localhost:11434";
 
   try {
+    console.log("🔍 Start: Tagging task with LLM:", task);
     const r = await fetch(`${base}/api/chat`, {
       method: "POST",
       body: JSON.stringify({
@@ -29,7 +30,9 @@ export async function tagWithLLM(task: string): Promise<Category> {
     if (!r.ok) throw new Error(`Ollama ${r.status}`);
 
     const { message } = (await r.json()) as { message?: { content?: string } };
-    return CATEGORIES.find(c => message?.content?.includes(c)) ?? "Other";
+    const category = CATEGORIES.find(c => message?.content?.includes(c)) ?? "Other";
+    console.log("✅ Tagging completed:", category);
+    return category as Category;
   } catch (err) {
     console.warn("⚠️  Ollama call failed → defaulting to Other:", err);
     return "Other";

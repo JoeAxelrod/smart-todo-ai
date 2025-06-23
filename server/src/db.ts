@@ -35,7 +35,7 @@ export async function del(id: string, userId: string): Promise<number> {
     "delete from tasks where id=$1 and user_id=$2",
     [id, userId]
   );
-  return rowCount;
+  return rowCount ?? 0;
 }
 
 export async function updateTag(id: string, tag: string): Promise<void> {

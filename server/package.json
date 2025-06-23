@@ -6,9 +6,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "dev-old": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" ts-node-dev --respawn --transpile-only --env-file .env.example src/index.ts",
-    "dev": "tsx --env-file=.env.example src/index.ts",
-    "dev-watch": "tsx --env-file=.env.example --watch src/index.ts"
+    "dev": "tsx --env-file=.env.example src/server.ts",
+    "dev-watch": "tsx --env-file=.env.example --watch src/server.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

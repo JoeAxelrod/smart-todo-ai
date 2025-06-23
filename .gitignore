@@ -5,6 +5,7 @@ node_modules/
 .env
 .env.*
 !server\.env.example
+!server/.env.example
 
 # Logs and debug info
 logs/

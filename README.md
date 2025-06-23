@@ -57,7 +57,8 @@ This project is a fullstack web application allowing users to manage a todo list
 🔑 Example Login
 ----------------
 
-    User name: Any username (creates token automatically)
+    name: Any username (creates token automatically)
+    You can sign out and sign in with another account, then return to the first account.
 
 📺 Project Demo
 ---------------
@@ -77,7 +78,9 @@ This project is a fullstack web application allowing users to manage a todo list
 📂 Project Structure
 --------------------
 
-smart-todo-ai
-├── client        # React frontend
-├── server        # Express backend
-└── docker-compose.yml
+```text
+smart-todo-ai/
+├── client/               # React frontend
+├── server/               # Express backend
+└── docker-compose.yml    # Docker Compose configuration
+```
