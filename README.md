@@ -63,7 +63,7 @@ This project is a fullstack web application allowing users to manage a todo list
 📺 Project Demo
 ---------------
 
-[![Project Demo](https://www.youtube.com/watch?v=WSl_B8qAZyM)
+[![Project Demo in YouTube](https://www.youtube.com/watch?v=WSl_B8qAZyM)
 
 
 🎯 Bonus Tasks Implemented
