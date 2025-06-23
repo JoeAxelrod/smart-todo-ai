@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tasks          
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: todo
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports: ["5432:5432"]
+
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    restart: unless-stopped
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+
+  kafka:
+    image: bitnami/kafka:3.5.2
+    restart: unless-stopped
+    depends_on: [zookeeper]
+    environment:
+      KAFKA_ENABLE_KRAFT: "no"
+      KAFKA_CFG_BROKER_ID: 1
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+
+      # 2 listeners: one for other containers, one for your laptop
+      KAFKA_CFG_LISTENERS:  INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:19092
+      KAFKA_CFG_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:9092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    ports:
+      - "9092:19092"   # host:container
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - ollama:/root/.ollama
+    ports: ["11434:11434"]
+    # must pull the model manually before using it: docker compose exec ollama ollama pull gemma:2b
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports: ["8080:8080"]
+
+  api: 
+    build: ./server                 
+    restart: unless-stopped
+    depends_on: [postgres, kafka, ollama]
+    environment:
+      PG_CONN: postgres://todo:todo@postgres:5432/tasks
+      KAFKA_BROKERS: kafka:9092
+      OLLAMA_BASE_URL: http://ollama:11434
+      JWT_SECRET: dev-secret
+    ports: ["4000:4000"]
+
+volumes:
+  pg-data:
+  ollama:

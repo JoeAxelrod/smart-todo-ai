@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.*
+!server\.env.example
+
+# Logs and debug info
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+
+# Docker volumes and caches
+volumes/
+docker-volumes/
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.sqlite
+*.db
+
+# IDE files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Ollama model data
+ollama/
